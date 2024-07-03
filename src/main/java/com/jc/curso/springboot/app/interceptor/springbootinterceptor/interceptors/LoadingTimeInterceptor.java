@@ -12,12 +12,14 @@ import jakarta.servlet.http.HttpServletResponse;
 public class LoadingTimeInterceptor implements HandlerInterceptor{  
     
 
+    @SuppressWarnings("null")
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+    public void postHandle( HttpServletRequest request,  HttpServletResponse response, Object handler,
             @Nullable ModelAndView modelAndView) throws Exception {
         
     }
 
+    @SuppressWarnings("null")
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
         return true;
