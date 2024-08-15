@@ -1,5 +1,8 @@
 package com.jc.curso.springboot.app.interceptor.springbootinterceptor.interceptors;
 
+// import java.util.Date;
+// import java.util.HashMap;
+// import java.util.Map;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -9,6 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+// import com.fasterxml.jackson.core.JsonProcessingException;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +26,7 @@ public class LoadingTimeInterceptor implements HandlerInterceptor{
     
     
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 
         HandlerMethod controller =((HandlerMethod) handler);
         logger.info("LoadingTimerInterceptor: preHandler() entrando .... "  + controller.getMethod().getName());
@@ -29,13 +35,19 @@ public class LoadingTimeInterceptor implements HandlerInterceptor{
         request.setAttribute("start", start);
         Random random = new Random();
         int delay = random.nextInt(500);
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-           
-            e.printStackTrace();
-        }
+        Thread.sleep(delay);
+       
         return true;
+
+        // Map<String,String> json = new HashMap<>();
+        // json.put("error", "No tienes acceso a esta pagina!");
+        // json.put("date", new Date().toString());
+        // ObjectMapper mapper = new ObjectMapper();
+        // String jsonString = mapper.writeValueAsString(json);
+        // response.setContentType("application/json");
+        // response.setStatus(401);
+        // response.getWriter().write(jsonString);
+        // return false;
     }
 
     @Override
